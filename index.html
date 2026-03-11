@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepUp Pro | Ultimate Pedometer</title>
+    
+    <meta name="description" content="Track your daily steps, distance, and calories with StepUp. A professional PWA Pedometer with history and PDF export.">
+    <meta property="og:title" content="StepUp Pro - Fitness Tracker">
+    <meta property="og:description" content="Apne steps track karein aur fit rahein. Offline support ke saath!">
+    <meta property="og:image" content="icon.png">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">Step<span>Up</span></div>
+        <button class="hamburger" id="menu-toggle">☰</button>
+        <nav id="nav-menu">
+            <a href="#">Home</a>
+            <a href="#" id="export-pdf">Export PDF</a>
+            <a href="#" id="share-btn">Share App</a>
+        </nav>
+    </header>
+
+    <div class="app-container">
+        <div class="stats-circle">
+            <div class="inner-circle">
+                <span id="step-count">0</span>
+                <p>Steps</p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn" class="btn-primary">Start</button>
+            <button id="reset-btn" class="btn-secondary">Reset & Save</button>
+        </div>
+
+        <div class="history-section">
+            <h3>History</h3>
+            <ul id="history-list"></ul>
+            <button id="clear-history" class="btn-danger">Delete History</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 StepUp Pro. Made for Fitness.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
