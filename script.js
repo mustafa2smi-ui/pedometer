@@ -1,3 +1,4 @@
+/*
 let steps = 0;
 let isTracking = false;
 
@@ -97,3 +98,54 @@ function updateClock() {
 // Har 1 second mein update hoga
 setInterval(updateClock, 1000);
 updateClock(); // Turant chalane ke liye
+*/
+let steps = 0;
+let isTracking = false;
+const stepDisplay = document.getElementById('step-count');
+const distDisplay = document.getElementById('distance');
+const calDisplay = document.getElementById('calories');
+
+document.getElementById('start-btn').addEventListener('click', function() {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission().then(permissionState => {
+            if (permissionState === 'granted') {
+                toggleTracking();
+            }
+        });
+    } else {
+        toggleTracking();
+    }
+});
+
+function toggleTracking() {
+    isTracking = !isTracking;
+    document.getElementById('start-btn').innerText = isTracking ? "Pause" : "Start Tracking";
+    
+    if (isTracking) {
+        window.addEventListener('devicemotion', handleMotion);
+    } else {
+        window.removeEventListener('devicemotion', handleMotion);
+    }
+}
+
+function handleMotion(event) {
+    let acc = event.accelerationIncludingGravity;
+    let totalAcc = Math.sqrt(acc.x ** 2 + acc.y ** 2 + acc.z ** 2);
+    
+    // Threshold for a step (aap isse adjust kar sakte hain)
+    if (totalAcc > 12) { 
+        steps++;
+        updateDisplay();
+    }
+}
+
+function updateDisplay() {
+    stepDisplay.innerText = steps;
+    distDisplay.innerText = (steps * 0.00076).toFixed(2); // Avg step to km
+    calDisplay.innerText = Math.floor(steps * 0.04); // Avg calories
+}
+
+document.getElementById('reset-btn').onclick = () => {
+    steps = 0;
+    updateDisplay();
+};
