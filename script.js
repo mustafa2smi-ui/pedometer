@@ -72,3 +72,28 @@ document.getElementById('share-btn').onclick = async () => {
 document.getElementById('menu-toggle').onclick = () => {
     document.getElementById('nav-menu').classList.toggle('active');
 };
+function updateClock() {
+    const now = new Date();
+    
+    // Time Format (HH:MM:SS)
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: true, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+    });
+    
+    // Date Format (DD MMM, YYYY)
+    const dateString = now.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    });
+
+    document.getElementById('live-clock').innerText = timeString;
+    document.getElementById('live-date').innerText = dateString;
+}
+
+// Har 1 second mein update hoga
+setInterval(updateClock, 1000);
+updateClock(); // Turant chalane ke liye
